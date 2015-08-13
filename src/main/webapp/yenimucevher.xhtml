@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Yeni Mucevher Ekle</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+                <p:graphicImage library="images" name="ajaxloadingbar.gif" />
+            </p:dialog>
+            <p:layout fullPage="true">
+                <p:layoutUnit position="north" size="90" >
+                    <p:graphicImage library="images" name="logo.png"/> 
+                </p:layoutUnit>
+
+                
+
+                <p:layoutUnit position="west" size="210" header="Menu" collapsible="true">
+                    <h:form>
+                        <p:menu>
+
+                            <p:menuitem value="Mücevherler" action="adminmucevherler" />
+                            <p:menuitem value="Kullanıcılar" action="kullanicilar" />
+                            <p:menuitem value="Mücevherler Bilgileri" action="admin" />
+                            <p:menuitem value="Yeni Mücevher ekle" action="yenimucevher" />
+                            <p:menuitem value="Resim Ekle" action="fileupload" />
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center"  >
+                    <h2><h:outputText value="Yeni Mücevher Ekleme " /></h2>
+
+                    <h:form>
+                        <p:growl id="growl" showDetail="true" />
+
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <h:outputText value="Mücevher Adı:" />
+                            <p:inputText value="#{servis.selectedItem}" />
+                            <p:commandButton value="Yeni Mücevher Oluştur" update="growl" action="#{servis.yeniMucevher}" />
+                        </h:panelGrid>
+
+                    </h:form>
+
+                </p:layoutUnit>
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
+

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Login Page</title>
+            </f:facet>
+        </h:head>
+        <h:body>
+            <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+            <p:dialog widgetVar="statusDialog" modal="false" draggable="false" closable="false" resizable="false" showHeader="false">
+                <p:graphicImage library="images" name="ajaxloadingbar.gif" />
+            </p:dialog>
+            <p:layout fullPage="true" >
+
+
+                <p:layoutUnit position="south" size="50" closable="true" collapsible="true">
+                    Footer
+                </p:layoutUnit>
+                <p:layoutUnit position="center">
+                    <p:graphicImage library="images" name="logo.png"/> 
+
+                    <h:form>
+                        <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+                        <p:dialog header="Giriş" widgetVar="dlg"  resizable="false" visible="true" closable="false">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel for="email" value="Email:" />
+                                <p:inputText id="email" value="#{servis.kullaniciEmail}"  label="email">
+                                </p:inputText>
+
+                                <h:outputLabel for="sifre" value="Şifre:" />
+                                <p:password id="sifre" value="#{servis.sifre}"  label="sifre">
+                                </p:password>
+                                <f:facet name="footer">
+                                    <p:commandButton value="Giriş" update="growl" action="#{servis.login}"  />
+                                    <p:commandButton value="Kayıt İçin" action="kayit" style="float: right;" />
+                                    <p:commandButton value="Fiyatlar" update="growl" action="sonkullanici" immediate="true" />
+                                </f:facet>  
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+                    <script type="text/javascript">
+                        function handleLoginRequest(xhr, status, args) {
+                            if (args.validationFailed || !args.loggedIn) {
+                                PF('dlg').jq.effect("shake", {times: 5}, 100);
+                            }
+                            else {
+                                PF('dlg').hide();
+                                $('#loginLink').fadeOut();
+                            }
+                        }
+                    </script>
+                </p:layoutUnit>
+
+            </p:layout>
+        </h:body>
+    </f:view>
+</html>
