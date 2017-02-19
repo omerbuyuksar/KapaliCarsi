@@ -90,7 +90,7 @@ public class Servis extends javax.mail.Authenticator implements Serializable {
 
     public Servis() {
         _user = "obuyuksar@hotmail.com";
-        _pass = "Omer123456";
+        _pass = "*******";
     }
 
     public void handleFileUpload(FileUploadEvent event) {
